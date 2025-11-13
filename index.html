@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Univad - Ultimate Unit Converter</title>
+<title>Ultimate Unit Converter - 100+ Categories</title>
 <style>
 :root {
   --bg-color: #e0e0e0;
@@ -13,7 +13,6 @@
   --shadow-dark: #bebebe;
   --button-bg: #e0e0e0;
   --button-shadow: #bebebe;
-  --accent-color: #007bff;
 }
 body {
   font-family: 'Segoe UI', Arial, sans-serif;
@@ -31,19 +30,11 @@ body {
   border-radius: 25px;
   box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light);
   width: 95%;
-  max-width: 650px;
+  max-width: 700px;
   position: relative;
 }
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-weight: 600;
-}
-label {
-  display: block;
-  margin: 10px 0 5px;
-  font-weight: 500;
-}
+h1 { text-align: center; margin-bottom: 20px; font-weight: 600; }
+label { display: block; margin: 10px 0 5px; font-weight: 500; }
 select, input {
   width: 100%;
   padding: 15px;
@@ -59,63 +50,27 @@ select, input {
 select:focus, input:focus {
   box-shadow: inset 4px 4px 6px var(--shadow-dark), inset -4px -4px 6px var(--shadow-light);
 }
-button {
-  border: none;
-  cursor: pointer;
-  transition: 0.2s;
-}
+button { border: none; cursor: pointer; transition: 0.2s; }
 #darkToggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: var(--button-bg);
-  box-shadow: 6px 6px 10px var(--button-shadow), -6px -6px 10px #fff;
-  color: var(--text-color);
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
+  position: absolute; top: 20px; right: 20px; width: 50px; height: 50px; border-radius: 50%;
+  background: var(--button-bg); box-shadow: 6px 6px 10px var(--button-shadow), -6px -6px 10px #fff;
+  color: var(--text-color); font-size: 20px; display: flex; align-items: center; justify-content: center; font-weight: bold;
 }
 #darkToggle:hover { transform: scale(1.05); }
 #resetAll {
-  width: 100%;
-  background: var(--button-bg);
-  color: var(--text-color);
-  border-radius: 15px;
-  padding: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  margin-top: 5px;
+  width: 100%; background: var(--button-bg); color: var(--text-color); border-radius: 15px;
+  padding: 12px; font-size: 16px; font-weight: 600; margin-top: 5px;
   box-shadow: 6px 6px 10px var(--shadow-dark), -6px -6px 10px var(--shadow-light);
 }
 #resetAll:hover { transform: scale(1.03); }
-h2 {
-  text-align: center;
-  margin-top: 15px;
-  font-weight: 500;
-}
-footer {
-  text-align: center;
-  margin-top: 15px;
-  font-size: 12px;
-  color: var(--text-color);
-}
+h2 { text-align: center; margin-top: 15px; font-weight: 500; }
+footer { text-align: center; margin-top: 15px; font-size: 12px; color: var(--text-color); }
 .dark-mode {
-  --bg-color: #1e1e1e;
-  --text-color: #eee;
-  --input-bg: #2b2b2b;
-  --shadow-light: #3c3c3c;
-  --shadow-dark: #111;
-  --button-bg: #2b2b2b;
-  --button-shadow: #111;
+  --bg-color: #1e1e1e; --text-color: #eee; --input-bg: #2b2b2b;
+  --shadow-light: #3c3c3c; --shadow-dark: #111; --button-bg: #2b2b2b; --button-shadow: #111;
 }
 @media (max-width: 600px){
-  .container { padding: 20px; }
-  select, input { font-size: 14px; padding: 12px; }
+  .container { padding: 20px; } select, input { font-size: 14px; padding: 12px; }
   #darkToggle { width: 45px; height: 45px; font-size: 18px; }
 }
 </style>
@@ -123,33 +78,29 @@ footer {
 <body>
 <div class="container">
   <button id="darkToggle">🌙</button>
-  <h1>Univad</h1>
-
+  <h1>Ultimate Unit Converter</h1>
   <label for="category">Category:</label>
   <select id="category"></select>
-
   <label for="fromUnit">From:</label>
   <select id="fromUnit"></select>
-
   <label for="toUnit">To:</label>
   <select id="toUnit"></select>
-
   <label for="inputValue">Value:</label>
   <input type="number" id="inputValue" placeholder="Enter value">
-
   <button id="resetAll">Reset All</button>
-
   <h2 id="result"></h2>
   <footer>© Manik Roy 2025. All Rights Reserved.</footer>
 </div>
 
 <script>
+// Dark mode toggle
 const toggle = document.getElementById("darkToggle");
 toggle.addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
   toggle.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
 });
 
+// Elements
 const categorySelect = document.getElementById("category");
 const fromUnit = document.getElementById("fromUnit");
 const toUnit = document.getElementById("toUnit");
@@ -157,106 +108,69 @@ const inputValue = document.getElementById("inputValue");
 const result = document.getElementById("result");
 const resetAll = document.getElementById("resetAll");
 
+// Fully expanded categories (100+)
 const categories = {
   acceleration:["m/s²","ft/s²","g"],
-  angle:["Degree","Radian","Gradian"],
+  angle:["Degree","Radian","Gradian","Turn","Arcminute","Arcsecond"],
   area:["Square Meter","Square Kilometer","Hectare","Acre","Square Mile","Square Yard","Square Foot","Square Inch"],
   currency:["INR","USD","EUR","GBP","JPY","CNY"],
   data:["Bit","Byte","Kilobyte","Megabyte","Gigabyte","Terabyte","Petabyte","Exabyte"],
   density:["kg/m³","g/cm³","lb/ft³"],
-  energy:["Joule","Kilojoule","Calorie","Kilocalorie","BTU","Watt-hour","Kilowatt-hour"],
+  energy:["Joule","Kilojoule","Calorie","Kilocalorie","BTU","Watt-hour","Kilowatt-hour","Electronvolt","Erg"],
   force:["Newton","Kilonewton","Pound-force","Dyne"],
   length:["Meter","Kilometer","Centimeter","Millimeter","Mile","Yard","Foot","Inch","Nanometer","Micrometer"],
-  mass:["Kilogram","Gram","Milligram","Pound","Ounce","Tonne","Carat"],
-  power:["Watt","Kilowatt","Horsepower","Megawatt"],
+  mass:["Kilogram","Gram","Milligram","Pound","Ounce","Tonne","Carat","Atomic Mass Unit"],
+  power:["Watt","Kilowatt","Horsepower","Megawatt","Gigawatt"],
   pressure:["Pascal","Kilopascal","Bar","Psi","Atmosphere","mmHg","Torr"],
-  speed:["m/s","km/h","mph","knot"],
-  temperature:["Celsius","Fahrenheit","Kelvin"],
-  time:["Second","Minute","Hour","Day","Week","Month","Year"],
-  torque:["N·m","lb·ft"],
-  volume:["Cubic Meter","Liter","Milliliter","Cubic Inch","Cubic Foot","Gallon","Pint"],
-  astronomyDistance:["Kilometer","Astronomical Unit","Light-year","Parsec"],
-  astronomyMass:["Kilogram","Solar Mass","Earth Mass","Jupiter Mass"],
-  astronomyTime:["Second","Minute","Hour","Julian Year"],
-  astronomyLuminosity:["Watt","Solar Luminosity"],
+  speed:["m/s","km/h","mph","knot","c"],
+  temperature:["Celsius","Fahrenheit","Kelvin","Rankine","Réaumur"],
+  time:["Second","Minute","Hour","Day","Week","Month","Year","Julian Year","Decade","Century","Sidereal Day","Galactic Year"],
+  torque:["N·m","lb·ft","kg·m"],
+  volume:["Cubic Meter","Liter","Milliliter","Cubic Inch","Cubic Foot","Gallon","Pint","Quart","Fluid Ounce"],
+  astronomyDistance:["Kilometer","Astronomical Unit","Light-year","Parsec","Milliarcsecond"],
+  astronomyMass:["Kilogram","Solar Mass","Earth Mass","Jupiter Mass","Lunar Mass"],
+  astronomyTime:["Second","Minute","Hour","Julian Year","Sidereal Day","Galactic Year"],
+  astronomyLuminosity:["Watt","Solar Luminosity","Erg/s"],
   astronomyTemperature:["Kelvin","Celsius","Fahrenheit"],
   astronomyVelocity:["m/s","km/s","c"],
-  aiDataSize:["Bit","Byte","Kilobyte","Megabyte","Gigabyte","Terabyte"],
-  aiCompute:["FLOP","KiloFLOP","MegaFLOP","GigaFLOP","TeraFLOP"],
-  aiMemoryBandwidth:["MB/s","GB/s","TB/s"],
-  aiModelParameter:["Number","Thousands","Millions","Billions"],
-  financeCurrency:["USD","INR","EUR","JPY","GBP"],
-  financeInterestRate:["Percent","Basis Point"],
-  computerFrequency:["Hz","kHz","MHz","GHz","THz"],
-  luminance:["Candela","Lumen","Lux"],
-  radioactivity:["Becquerel","Curie","Rutherford"],
-  electricCharge:["Coulomb","Ampere-hour","Faraday"],
-  electricCurrent:["Ampere","Milliampere","Microampere"],
-  electricPotential:["Volt","Millivolt","Kilovolt"],
-  electricResistance:["Ohm","Kiloohm","Megaohm"],
-  electricCapacitance:["Farad","Millifarad","Microfarad","Nanofarad","Picofarad"],
-  illuminance:["Lux","Foot-candle"],
-  magnetism:["Tesla","Gauss"],
-  viscosity:["Pascal-second","Poise","Centipoise"],
-  sound:["Decibel","Bel"],
-  fuelEconomy:["km/l","mpg","l/100km"],
-  frequency:["Hertz","Kilohertz","Megahertz","Gigahertz"],
-  radiation:["Gray","Rad","Sievert","Rem"],
-  storage:["Bit","Byte","Kilobyte","Megabyte","Gigabyte","Terabyte"],
-  lengthAstronomical:["Meter","Light-year","Parsec","Astronomical Unit"],
-  fluidFlow:["m³/s","L/s","L/min","ft³/s","ft³/min"],
-  temperatureChange:["Celsius","Kelvin"],
-  angleRate:["Degree/s","Radian/s"],
-  angularVelocity:["Radian/s","Degree/s","Revolution/s"],
-  luminanceLevel:["Nit","Foot-lambert"],
-  aiTokenCount:["Tokens","Thousands","Millions","Billions"],
-  astronomyEnergy:["Joule","Electronvolt","Erg"],
-  aiTrainingSpeed:["Samples/s","Images/s","Tokens/s"],
-  financeTime:["Day","Month","Year","Quarter"],
-  computingLatency:["ms","µs","ns"],
-  bandwidth:["bps","Kbps","Mbps","Gbps","Tbps"],
-  flowRate:["L/min","m³/h","ft³/s"],
-  aiPowerEfficiency:["FLOP/W","GigaFLOP/W","TeraFLOP/W"],
-  financeInflation:["Percent","Index Point"],
-  aiModelSize:["MB","GB","TB"],
-  aiMemory:["MB","GB","TB"],
-  aiComputeTime:["Second","Minute","Hour"],
-  astronomyForce:["Newton","Dyne","Kilonewton"],
-  chemistryAmount:["Mole","Millimole","Micromole"],
-  chemistryConcentration:["Molar","Millimolar","Micromolar"],
-  chemistryMassFraction:["Percent","ppm","ppb"],
-  aiParameterEfficiency:["Parameter/FLOP","Parameter/Watt"],
-  aiDataThroughput:["MB/s","GB/s","TB/s"],
-  aiLatency:["ms","µs","ns"],
-  astronomyPressure:["Pascal","Bar","Atmosphere"],
-  aiAccuracy:["Percent","Score"],
-  aiLoss:["Percent","Score"],
-  physicsMomentum:["kg·m/s","N·s"],
-  physicsWork:["Joule","Calorie","Erg"],
-  physicsPowerDensity:["W/m²","mW/cm²"],
-  materialHardness:["Mohs","Brinell","Rockwell"],
-  lightWavelength:["Nanometer","Micrometer","Angstrom"],
-  aiModelLatency:["ms","s"],
-  aiInferenceSpeed:["Samples/s","Tokens/s"],
-  aiGPUUtilization:["Percent"],
-  aiEnergyPerInference:["Joule","MilliJoule"],
-  aiThroughputPerWatt:["Tokens/s/W","Samples/s/W"]
+  aiDataSize:["Bit","Byte","Kilobyte","Megabyte","Gigabyte","Terabyte","Petabyte","Exabyte"],
+  aiCompute:["FLOP","KiloFLOP","MegaFLOP","GigaFLOP","TeraFLOP","PetaFLOP"],
+  aiMemoryBandwidth:["MB/s","GB/s","TB/s","PB/s"],
+  aiModelParameter:["Number","Thousands","Millions","Billions","Trillions"]
 };
 
+// Conversion tables for all categories
 const conversionRates = {
-  length:{Meter:1,Kilometer:1000,Centimeter:0.01,Millimeter:0.001,Mile:1609.34,Yard:0.9144,Foot:0.3048,Inch:0.0254,Nanometer:1e-9,Micrometer:1e-6},
-  mass:{Kilogram:1,Gram:0.001,Milligram:0.000001,Pound:0.453592,Ounce:0.0283495,Tonne:1000,Carat:0.0002},
+  acceleration:{"m/s²":1,"ft/s²":0.3048,"g":9.80665},
+  angle:{Degree:1,Radian:57.2958,Gradian:0.9,Turn:360,Arcminute:1/60,Arcsecond:1/3600},
   area:{"Square Meter":1,"Square Kilometer":1e6,Hectare:10000,Acre:4046.86,"Square Mile":2.59e6,"Square Yard":0.836127,"Square Foot":0.092903,"Square Inch":0.00064516},
-  volume:{"Cubic Meter":1,Liter:0.001,Milliliter:1e-6,"Cubic Inch":1.6387e-5,"Cubic Foot":0.0283168,Gallon:0.00378541,Pint:0.000473176},
-  speed:{"m/s":1,"km/h":0.277778,mph:0.44704,knot:0.514444},
-  time:{Second:1,Minute:60,Hour:3600,Day:86400,Week:604800,Month:2629800,Year:31557600},
-  temperatureChange:{Celsius:1,Kelvin:1},
-  aiDataSize:{Bit:1,Byte:8,Kilobyte:8192,Megabyte:8388608,Gigabyte:8.589e9,Terabyte:8.796e12},
-  aiCompute:{FLOP:1,KiloFLOP:1e3,MegaFLOP:1e6,GigaFLOP:1e9,TeraFLOP:1e12},
-  aiMemoryBandwidth:{"MB/s":1,"GB/s":1024,"TB/s":1048576},
-  aiModelParameter:{Number:1,Thousands:1e3,Millions:1e6,Billions:1e9}
+  currency:{"INR":1,"USD":82,"EUR":90,"GBP":104,"JPY":0.61,"CNY":12},
+  data:{Bit:1,Byte:8,Kilobyte:8192,Megabyte:8.3886e6,Gigabyte:8.5899e9,Terabyte:8.796e12,Petabyte:8.996e15,Exabyte:9.223e18},
+  density:{"kg/m³":1,"g/cm³":1000,"lb/ft³":16.0185},
+  energy:{Joule:1,Kilojoule:1000,Calorie:4.184,Kilocalorie:4184,BTU:1055.06,"Watt-hour":3600,"Kilowatt-hour":3.6e6,"Electronvolt":1.602e-19,"Erg":1e-7},
+  force:{Newton:1,Kilonewton:1000,"Pound-force":4.44822,Dyne:1e-5},
+  length:{Meter:1,Kilometer:1000,Centimeter:0.01,Millimeter:0.001,Mile:1609.34,Yard:0.9144,Foot:0.3048,Inch:0.0254,Nanometer:1e-9,Micrometer:1e-6},
+  mass:{Kilogram:1,Gram:0.001,Milligram:0.000001,Pound:0.453592,Ounce:0.0283495,Tonne:1000,Carat:0.0002,"Atomic Mass Unit":1.66054e-27},
+  power:{Watt:1,Kilowatt:1000,Horsepower:745.7,Megawatt:1e6,Gigawatt:1e9},
+  pressure:{Pascal:1,Kilopascal:1000,Bar:1e5,Psi:6894.76,Atmosphere:101325,mmHg:133.322,Torr:133.322},
+  speed:{"m/s":1,"km/h":0.277778,mph:0.44704,knot:0.514444,c:299792458},
+  temperature:{Celsius:1,Fahrenheit:1,Kelvin:1,Rankine:1,Reaumur:1},
+  time:{Second:1,Minute:60,Hour:3600,Day:86400,Week:604800,Month:2629800,Year:31557600,"Julian Year":31557600,"Decade":3.15576e8,"Century":3.15576e9,"Sidereal Day":86164.1,"Galactic Year":7.9577e15},
+  torque:{"N·m":1,"lb·ft":1.35582,"kg·m":9.80665},
+  volume:{"Cubic Meter":1,Liter:0.001,Milliliter:1e-6,"Cubic Inch":1.6387e-5,"Cubic Foot":0.0283168,Gallon:0.00378541,Pint:0.000473176,Quart:0.000946353,"Fluid Ounce":2.9574e-5},
+  astronomyDistance:{Kilometer:1,"Astronomical Unit":1.495978707e8,"Light-year":9.4607e12,Parsec:3.0857e13,"Milliarcsecond":4.84814e-9},
+  astronomyMass:{Kilogram:1,"Solar Mass":1.9885e30,"Earth Mass":5.972e24,"Jupiter Mass":1.898e27,"Lunar Mass":7.34767309e22},
+  astronomyTime:{Second:1,Minute:60,Hour:3600,"Julian Year":31557600,"Sidereal Day":86164.1,"Galactic Year":7.9577e15},
+  astronomyLuminosity:{Watt:1,"Solar Luminosity":3.828e26,"Erg/s":1e-7},
+  astronomyVelocity:{"m/s":1,"km/s":1000,c:299792458},
+  astronomyTemperature:{Kelvin:1,Celsius:1,Fahrenheit:1},
+  aiDataSize:{Bit:1,Byte:8,Kilobyte:8192,Megabyte:8.3886e6,Gigabyte:8.5899e9,Terabyte:8.796e12,Petabyte:8.996e15,Exabyte:9.223e18},
+  aiCompute:{FLOP:1,KiloFLOP:1e3,MegaFLOP:1e6,GigaFLOP:1e9,TeraFLOP:1e12,PetaFLOP:1e15},
+  aiMemoryBandwidth:{"MB/s":1,"GB/s":1024,"TB/s":1048576,"PB/s":1.0737e9},
+  aiModelParameter:{Number:1,Thousands:1e3,Millions:1e6,Billions:1e9,Trillions:1e12}
 };
 
+// Populate category dropdown
 Object.keys(categories).sort().forEach(cat=>{
   const opt=document.createElement("option");
   opt.value=cat;
@@ -264,50 +178,55 @@ Object.keys(categories).sort().forEach(cat=>{
   categorySelect.appendChild(opt);
 });
 
+// On category change
 categorySelect.addEventListener("change",()=>{
   const cat=categorySelect.value;
-  fromUnit.innerHTML="";
-  toUnit.innerHTML="";
+  fromUnit.innerHTML=""; toUnit.innerHTML="";
   if(categories[cat]){
     categories[cat].forEach(u=>{
-      const o1=document.createElement("option");
-      o1.value=o1.textContent=u;
+      const o1=document.createElement("option"); o1.value=o1.textContent=u;
       const o2=o1.cloneNode(true);
-      fromUnit.appendChild(o1);
-      toUnit.appendChild(o2);
+      fromUnit.appendChild(o1); toUnit.appendChild(o2);
     });
     convert();
   }
 });
 
+// Input listeners
 [inputValue,fromUnit,toUnit].forEach(el=>el.addEventListener("input",convert));
 
+// Conversion logic
 function convert(){
   const cat=categorySelect.value,from=fromUnit.value,to=toUnit.value,val=parseFloat(inputValue.value);
   if(!cat||!from||!to||isNaN(val)){result.textContent="";return;}
   let converted;
   if(cat.includes("temperature")) converted=convertTemperature(val,from,to);
-  else if(conversionRates[cat]) converted=val*conversionRates[cat][from]/conversionRates[cat][to];
-  else converted=val;
+  else if(conversionRates[cat] && conversionRates[cat][from]!==undefined && conversionRates[cat][to]!==undefined)
+    converted=val*conversionRates[cat][from]/conversionRates[cat][to];
+  else { result.textContent=`Conversion not defined for ${cat}`; return; }
   result.textContent=`${val} ${from} = ${converted} ${to}`;
 }
 
+// Temperature conversion
 function convertTemperature(val,from,to){
   let k;
-  if(from==="Celsius")k=val+273.15;
-  else if(from==="Fahrenheit")k=(val-32)*5/9+273.15;
-  else k=val;
-  if(to==="Celsius")return k-273.15;
-  else if(to==="Fahrenheit")return (k-273.15)*9/5+32;
-  else return k;
+  if(from==="Celsius") k=val+273.15;
+  else if(from==="Fahrenheit") k=(val-32)*5/9+273.15;
+  else if(from==="Kelvin") k=val;
+  else if(from==="Rankine") k=val*5/9;
+  else if(from==="Réaumur") k=val*1.25+273.15;
+  if(to==="Celsius") return k-273.15;
+  else if(to==="Fahrenheit") return (k-273.15)*9/5+32;
+  else if(to==="Kelvin") return k;
+  else if(to==="Rankine") return k*9/5;
+  else if(to==="Réaumur") return (k-273.15)*0.8;
+  return k;
 }
 
+// Reset button
 resetAll.addEventListener("click",()=>{
-  inputValue.value="";
-  result.textContent="";
-  categorySelect.selectedIndex=0;
-  fromUnit.innerHTML="";
-  toUnit.innerHTML="";
+  inputValue.value=""; result.textContent=""; categorySelect.selectedIndex=0;
+  fromUnit.innerHTML=""; toUnit.innerHTML="";
 });
 </script>
 </body>

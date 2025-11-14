@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ultimate Unit Converter - 100+ Categories</title>
+<title>Univad - Ultimate Unit Converter</title>
 <style>
 :root {
   --bg-color: #e0e0e0;
@@ -30,7 +30,7 @@ body {
   border-radius: 25px;
   box-shadow: 10px 10px 20px var(--shadow-dark), -10px -10px 20px var(--shadow-light);
   width: 95%;
-  max-width: 600px;
+  max-width: 700px;
   position: relative;
 }
 h1 { text-align: center; margin-bottom: 20px; font-weight: 600; }
@@ -46,6 +46,8 @@ select, input {
   font-size: 16px;
   outline: none;
   color: var(--text-color);
+  max-height: 200px;
+  overflow-y: auto;
 }
 select:focus, input:focus { box-shadow: inset 4px 4px 6px var(--shadow-dark), inset -4px -4px 6px var(--shadow-light); }
 h2 { text-align: center; margin-top: 20px; font-weight: 500; color: var(--text-color); }
@@ -85,7 +87,7 @@ footer {
   font-size: 12px;
   color: var(--text-color);
 }
-@media (max-width: 600px){
+@media (max-width: 700px){
   .container { padding: 20px; width: 95%; }
   select, input { font-size: 14px; padding: 12px; }
   button { width: 45px; height: 45px; font-size: 18px; }
@@ -95,7 +97,7 @@ footer {
 <body>
 <div class="container">
   <button id="darkToggle">🌙</button>
-  <h1>Unit Converter</h1>
+  <h1>Univad</h1>
   <label for="category">Category:</label>
   <select id="category"></select>
   <label for="fromUnit">From:</label>
@@ -107,18 +109,21 @@ footer {
   <h2 id="result"></h2>
   <footer>© Manik Roy 2025. All Rights Reserved.</footer>
 </div>
+
 <script>
-const toggle = document.getElementById("darkToggle");
-toggle.addEventListener("click", () => { document.body.classList.toggle("dark-mode"); });
+// Dark mode
+const toggle=document.getElementById("darkToggle");
+toggle.addEventListener("click",()=>{document.body.classList.toggle("dark-mode");});
 
-const categorySelect = document.getElementById("category");
-const fromUnit = document.getElementById("fromUnit");
-const toUnit = document.getElementById("toUnit");
-const inputValue = document.getElementById("inputValue");
-const result = document.getElementById("result");
+// Elements
+const categorySelect=document.getElementById("category");
+const fromUnit=document.getElementById("fromUnit");
+const toUnit=document.getElementById("toUnit");
+const inputValue=document.getElementById("inputValue");
+const result=document.getElementById("result");
 
-// Categories
-const categories = {
+// --- Categories ---
+const categories={
   "Length":["Meter","Kilometer","Centimeter","Millimeter","Mile","Yard","Foot","Inch"],
   "Mass":["Kilogram","Gram","Milligram","Pound","Ounce"],
   "Area":["Square Meter","Square Kilometer","Hectare","Acre","Square Mile","Square Yard","Square Foot","Square Inch"],
@@ -135,34 +140,50 @@ const categories = {
   "Angle":["Degree","Radian","Gradian"],
   "Density":["kg/m³","g/cm³","lb/ft³"],
   "Data":["Bit","Byte","Kilobyte","Megabyte","Gigabyte","Terabyte"],
-  "Data Rate":["bps","Kbps","Mbps","Gbps"],
-  "Frequency":["Hz","kHz","MHz","GHz","THz"],
-  "Illuminance":["lux","foot-candle"],
-  "Luminous Flux":["lumen","kilolumen","megalumen"],
-  "Electric Charge":["C","mC","μC","nC","Ah"],
-  "Electric Current":["A","mA","μA"],
-  "Electric Potential":["V","mV","kV"],
-  "Electric Resistance":["Ω","kΩ","MΩ"],
-  "Electric Capacitance":["F","mF","μF","nF","pF"],
-  "Electric Inductance":["H","mH","μH"],
-  "Electric Power":["W","kW","MW"],
-  "Electric Energy":["J","kJ","Wh","kWh"],
-  "Magnetic Field":["T","G"],
-  "Magnetic Flux":["Wb","Mx"],
+  "Data Rate":["bps","Kbps","Mbps","Gbps","Tbps"],
   "AI Data Size":["Bit","Byte","Kilobyte","Megabyte","Gigabyte","Terabyte"],
   "AI Compute":["FLOP","KiloFLOP","MegaFLOP","GigaFLOP","TeraFLOP"],
   "AI Memory Bandwidth":["MB/s","GB/s","TB/s"],
-  "AI Model Parameters":["Number","Thousands","Millions","Billions"],
-  "Astronomical Distance":["Meter","Kilometer","Astronomical Unit","Light-year","Parsec"],
-  "Astronomical Mass":["Kilogram","Solar Mass","Earth Mass","Jupiter Mass"],
-  "Astronomical Time":["Second","Minute","Hour","Julian Year"],
-  "Astronomical Luminosity":["Watt","Solar Luminosity"],
-  "Astronomical Temperature":["Kelvin","Celsius","Fahrenheit"],
-  "Astronomical Velocity":["m/s","km/s","c"]
+  "AI Model Parameter":["Number","Thousands","Millions","Billions"],
+  "Electric Charge":["Coulomb","mC","μC","nC","pC","Ampere-hour"],
+  "Electric Current":["Ampere","mA","μA","kA"],
+  "Electric Potential":["Volt","mV","kV"],
+  "Electric Resistance":["Ohm","kOhm","MOhm"],
+  "Electric Capacitance":["Farad","mF","μF","nF","pF"],
+  "Electric Inductance":["Henry","mH","μH"],
+  "Electric Power":["Watt","Kilowatt","Horsepower"],
+  "Electric Energy":["Joule","Kilojoule","Watt-hour","Kilowatt-hour","Calorie"],
+  "Magnetic Field":["Tesla","Gauss"],
+  "Magnetic Flux":["Weber","Maxwell"],
+  "Frequency":["Hz","kHz","MHz","GHz","THz"],
+  "Wavelength":["Meter","Centimeter","Millimeter","Nanometer"],
+  "Sound Level":["dB","dBA","dBC"],
+  "Cooking Weight":["Gram","Kilogram","Milligram","Ounce","Pound"],
+  "Cooking Volume":["Milliliter","Liter","Teaspoon","Tablespoon","Cup","Pint","Quart","Gallon","Fluid Ounce"],
+  "Cooking Temperature":["Celsius","Fahrenheit","Kelvin"],
+  "Cooking Energy":["Calorie","Kilocalorie","Joule","Kilojoule"],
+  "BMI":["kg/m²","lb/in²"],
+  "Heart Rate":["BPM","Hz"],
+  "Blood Pressure":["mmHg","kPa"],
+  "Shoe Size":["US","UK","EU","CM"],
+  "Clothing Size":["XS","S","M","L","XL","XXL"],
+  "Fuel Consumption":["L/100km","mpg (US)","mpg (UK)"],
+  "Percentage":["%","Decimal"],
+  "Interest Rate":["Annual %","Monthly %"],
+  "Illuminance":["Lux","Foot-candle"],
+  "Luminous Flux":["Lumen","Candela","Phot"],
+  "Radiation Dose":["Gray","Rad","Sievert","Rem"],
+  // --- Astronomy ---
+  "Astronomy Distance":["Kilometer","Astronomical Unit","Light-year","Parsec"],
+  "Astronomy Mass":["Kilogram","Solar Mass","Earth Mass","Jupiter Mass"],
+  "Astronomy Time":["Second","Minute","Hour","Julian Year"],
+  "Astronomy Luminosity":["Watt","Solar Luminosity"],
+  "Astronomy Temperature":["Kelvin","Celsius","Fahrenheit"],
+  "Astronomy Velocity":["m/s","km/s","c"]
 };
 
-// Conversion rates / functions
-const conversionRates = {
+// --- Conversion rates ---
+const conversionRates={
   "Length":{"Meter":1,"Kilometer":1000,"Centimeter":0.01,"Millimeter":0.001,"Mile":1609.34,"Yard":0.9144,"Foot":0.3048,"Inch":0.0254},
   "Mass":{"Kilogram":1,"Gram":0.001,"Milligram":1e-6,"Pound":0.453592,"Ounce":0.0283495},
   "Area":{"Square Meter":1,"Square Kilometer":1e6,"Hectare":10000,"Acre":4046.86,"Square Mile":2.58988e6,"Square Yard":0.836127,"Square Foot":0.092903,"Square Inch":0.00064516},
@@ -174,94 +195,109 @@ const conversionRates = {
   "Energy":{"Joule":1,"Kilojoule":1000,"Calorie":4.184,"Kilocalorie":4184,"BTU":1055.06,"Watt-hour":3600},
   "Power":{"Watt":1,"Kilowatt":1000,"Horsepower":745.7},
   "Torque":{"N·m":1,"lb·ft":1.35582},
+  "Temperature":{"Celsius":1,"Fahrenheit":1,"Kelvin":1}, 
   "Time":{"Second":1,"Minute":60,"Hour":3600,"Day":86400,"Week":604800,"Month":2.6298e6,"Year":3.15576e7},
   "Angle":{"Degree":1,"Radian":0.0174533,"Gradian":0.9},
   "Density":{"kg/m³":1,"g/cm³":1000,"lb/ft³":16.0185},
-  "Data":{"Bit":1,"Byte":8,"Kilobyte":8192,"Megabyte":8.388e6,"Gigabyte":8.589e9,"Terabyte":8.796e12},
-  "Data Rate":{"bps":1,"Kbps":1000,"Mbps":1e6,"Gbps":1e9},
-  "Frequency":{"Hz":1,"kHz":1000,"MHz":1e6,"GHz":1e9,"THz":1e12},
-  "Illuminance":{"lux":1,"foot-candle":0.092903},
-  "Luminous Flux":{"lumen":1,"kilolumen":1000,"megalumen":1e6},
-  "Electric Charge":{"C":1,"mC":0.001,"μC":1e-6,"nC":1e-9,"Ah":1/3600},
-  "Electric Current":{"A":1,"mA":0.001,"μA":1e-6},
-  "Electric Potential":{"V":1,"mV":0.001,"kV":1000},
-  "Electric Resistance":{"Ω":1,"kΩ":1000,"MΩ":1e6},
-  "Electric Capacitance":{"F":1,"mF":0.001,"μF":1e-6,"nF":1e-9,"pF":1e-12},
-  "Electric Inductance":{"H":1,"mH":0.001,"μH":1e-6},
-  "Electric Power":{"W":1,"kW":1000,"MW":1e6},
-  "Electric Energy":{"J":1,"kJ":1000,"Wh":3600,"kWh":3.6e6},
-  "Magnetic Field":{"T":1,"G":1e-4},
-  "Magnetic Flux":{"Wb":1,"Mx":1e-8},
-  "AI Data Size":{"Bit":1,"Byte":8,"Kilobyte":8192,"Megabyte":8.388e6,"Gigabyte":8.589e9,"Terabyte":8.796e12},
-  "AI Compute":{"FLOP":1,"KiloFLOP":1000,"MegaFLOP":1e6,"GigaFLOP":1e9,"TeraFLOP":1e12},
+  "Data":{"Bit":1,"Byte":8,"Kilobyte":8192,"Megabyte":8388608,"Gigabyte":8589934592,"Terabyte":8796093022208},
+  "Data Rate":{"bps":1,"Kbps":1e3,"Mbps":1e6,"Gbps":1e9,"Tbps":1e12},
+  "AI Data Size":{"Bit":1,"Byte":8,"Kilobyte":8192,"Megabyte":8388608,"Gigabyte":8589934592,"Terabyte":8796093022208},
+  "AI Compute":{"FLOP":1,"KiloFLOP":1e3,"MegaFLOP":1e6,"GigaFLOP":1e9,"TeraFLOP":1e12},
   "AI Memory Bandwidth":{"MB/s":1,"GB/s":1024,"TB/s":1048576},
-  "AI Model Parameters":{"Number":v=>v,"Thousands":v=>v*1000,"Millions":v=>v*1e6,"Billions":v=>v*1e9},
-  "Astronomical Distance":{"Meter":1,"Kilometer":1000,"Astronomical Unit":1.4959787e11,"Light-year":9.4607e15,"Parsec":3.0857e16},
-  "Astronomical Mass":{"Kilogram":1,"Solar Mass":1.9885e30,"Earth Mass":5.972e24,"Jupiter Mass":1.898e27},
-  "Astronomical Time":{"Second":1,"Minute":60,"Hour":3600,"Julian Year":3.15576e7},
-  "Astronomical Luminosity":{"Watt":1,"Solar Luminosity":3.828e26},
-  "Astronomical Temperature":{"Kelvin":v=>v,"Celsius":v=>v+273.15,"Fahrenheit":v=>((v-32)*5/9)+273.15},
-  "Astronomical Velocity":{"m/s":1,"km/s":1000,"c":299792458}
+  "AI Model Parameter":{"Number":1,"Thousands":1e3,"Millions":1e6,"Billions":1e9},
+  "Electric Charge":{"Coulomb":1,"mC":0.001,"μC":1e-6,"nC":1e-9,"pC":1e-12,"Ampere-hour":3600},
+  "Electric Current":{"Ampere":1,"mA":0.001,"μA":1e-6,"kA":1000},
+  "Electric Potential":{"Volt":1,"mV":0.001,"kV":1000},
+  "Electric Resistance":{"Ohm":1,"kOhm":1000,"MOhm":1e6},
+  "Electric Capacitance":{"Farad":1,"mF":0.001,"μF":1e-6,"nF":1e-9,"pF":1e-12},
+  "Electric Inductance":{"Henry":1,"mH":0.001,"μH":1e-6},
+  "Electric Power":{"Watt":1,"Kilowatt":1000,"Horsepower":745.7},
+  "Electric Energy":{"Joule":1,"Kilojoule":1000,"Watt-hour":3600,"Kilowatt-hour":3.6e6,"Calorie":4.184},
+  "Magnetic Field":{"Tesla":1,"Gauss":1e-4},
+  "Magnetic Flux":{"Weber":1,"Maxwell":1e-8},
+  "Frequency":{"Hz":1,"kHz":1e3,"MHz":1e6,"GHz":1e9,"THz":1e12},
+  "Wavelength":{"Meter":1,"Centimeter":0.01,"Millimeter":0.001,"Nanometer":1e-9},
+  "Sound Level":{"dB":1,"dBA":1,"dBC":1},
+  "Cooking Weight":{"Gram":1,"Kilogram":1000,"Milligram":0.001,"Ounce":28.3495,"Pound":453.592},
+  "Cooking Volume":{"Milliliter":1,"Liter":1000,"Teaspoon":4.92892,"Tablespoon":14.7868,"Cup":236.588,"Pint":473.176,"Quart":946.353,"Gallon":3785.41,"Fluid Ounce":29.5735},
+  "Cooking Energy":{"Calorie":4.184,"Kilocalorie":4184,"Joule":1,"Kilojoule":1000},
+  "BMI":{"kg/m²":1,"lb/in²":0.00064516},
+  "Heart Rate":{"BPM":1,"Hz":1/60},
+  "Blood Pressure":{"mmHg":1,"kPa":0.133322},
+  "Shoe Size":{"US":1,"UK":0.92,"EU":1.5,"CM":2.54},
+  "Fuel Consumption":{"L/100km":1,"mpg (US)":235.215,"mpg (UK)":282.481},
+  "Percentage":{"%":1,"Decimal":0.01},
+  "Interest Rate":{"Annual %":1,"Monthly %":1/12},
+  "Illuminance":{"Lux":1,"Foot-candle":10.7639},
+  "Luminous Flux":{"Lumen":1,"Candela":1,"Phot":10000},
+  "Radiation Dose":{"Gray":1,"Rad":0.01,"Sievert":1,"Rem":0.01},
+  // Astronomy
+  "Astronomy Distance":{"Kilometer":1,"Astronomical Unit":1.4959787e8,"Light-year":9.4607e12,"Parsec":3.0857e13},
+  "Astronomy Mass":{"Kilogram":1,"Solar Mass":1.9885e30,"Earth Mass":5.972e24,"Jupiter Mass":1.898e27},
+  "Astronomy Time":{"Second":1,"Minute":60,"Hour":3600,"Julian Year":3.15576e7},
+  "Astronomy Luminosity":{"Watt":1,"Solar Luminosity":3.828e26},
+  "Astronomy Temperature":{"Kelvin":1,"Celsius":1,"Fahrenheit":1},
+  "Astronomy Velocity":{"m/s":1,"km/s":1000,"c":299792458}
 };
 
 // Populate categories
-Object.keys(categories).sort().forEach(cat => {
-  const opt = document.createElement("option");
-  opt.value = cat;
-  opt.textContent = cat;
+Object.keys(categories).sort().forEach(cat=>{
+  const opt=document.createElement("option");
+  opt.value=cat; opt.textContent=cat;
   categorySelect.appendChild(opt);
 });
 
-// Update units when category changes
-categorySelect.addEventListener("change", () => {
-  const cat = categorySelect.value;
-  fromUnit.innerHTML = "";
-  toUnit.innerHTML = "";
-  if (categories[cat]) {
-    categories[cat].sort().forEach(u => {
-      const o1 = document.createElement("option"); o1.value = u; o1.textContent = u; fromUnit.appendChild(o1);
-      const o2 = document.createElement("option"); o2.value = u; o2.textContent = u; toUnit.appendChild(o2);
-    });
-    convert();
-  }
-});
+// Event listeners
+categorySelect.addEventListener("change",updateUnits);
+fromUnit.addEventListener("input",convert);
+toUnit.addEventListener("input",convert);
+inputValue.addEventListener("input",convert);
 
-// Listen to input changes
-[inputValue, fromUnit, toUnit].forEach(el => el.addEventListener("input", convert));
+// Functions
+function updateUnits(){
+  const cat=categorySelect.value;
+  fromUnit.innerHTML=""; toUnit.innerHTML="";
+  if(!categories[cat]) return;
+  categories[cat].forEach(u=>{
+    const o1=document.createElement("option"); o1.value=u; o1.textContent=u; fromUnit.appendChild(o1);
+    const o2=document.createElement("option"); o2.value=u; o2.textContent=u; toUnit.appendChild(o2);
+  });
+  convert();
+}
 
-function convert() {
-  const cat = categorySelect.value;
-  const from = fromUnit.value;
-  const to = toUnit.value;
-  const val = parseFloat(inputValue.value);
-  if (!cat || !from || !to || isNaN(val)) { result.textContent = ""; return; }
-
-  const rates = conversionRates[cat];
+function convert(){
+  const cat=categorySelect.value;
+  const from=fromUnit.value;
+  const to=toUnit.value;
+  const val=parseFloat(inputValue.value);
+  if(!cat||!from||!to||isNaN(val)){result.textContent=""; return;}
   let converted;
-  if (!rates) { result.textContent = "Conversion not defined"; return; }
-
-  // Handle function-based conversions
-  if (typeof rates[from] === "function") {
-    converted = rates[to](rates[from](val));
-  } else if (cat.toLowerCase().includes("temperature")) {
-    converted = convertTemperature(val, from, to);
-  } else {
-    converted = val * rates[from] / rates[to];
+  if(cat.toLowerCase().includes("temperature")){
+    converted=convertTemperature(val,from,to);
+  }else{
+    converted=val*conversionRates[cat][from]/conversionRates[cat][to];
   }
-
+  // Format result nicely
+  if(converted !== 0 && Math.abs(converted) < 0.0001) converted = converted.toExponential(6);
+  else converted = Math.round(converted * 1000000) / 1000000;
   result.textContent = `${val} ${from} = ${converted} ${to}`;
 }
 
-function convertTemperature(val, from, to) {
+function convertTemperature(val, from, to){
   let tempK;
-  if (from === "Celsius") tempK = val + 273.15;
-  else if (from === "Fahrenheit") tempK = (val - 32) * 5 / 9 + 273.15;
-  else tempK = val;
+  if(from === "Celsius") tempK = val + 273.15;
+  else if(from === "Fahrenheit") tempK = (val - 32) * 5 / 9 + 273.15;
+  else tempK = val; // Kelvin
 
-  if (to === "Celsius") return tempK - 273.15;
-  else if (to === "Fahrenheit") return (tempK - 273.15) * 9 / 5 + 32;
-  else return tempK;
+  if(to === "Celsius") return tempK - 273.15;
+  else if(to === "Fahrenheit") return (tempK - 273.15) * 9 / 5 + 32;
+  else return tempK; // Kelvin
 }
+
+// Initialize first category
+categorySelect.selectedIndex = 0;
+updateUnits();
 </script>
 </body>
 </html>
+
